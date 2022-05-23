@@ -1,0 +1,162 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/position';
+@use '/src/styles/mixins/flexbox';
+@use '/src/styles/mixins/typography';
+
+/*   .rightWing {
+    @include position.absolute(50% 24px auto auto);
+    transform: translateY(-50%);
+
+    button {
+      margin-left: 14px;
+    }
+  }
+}
+ */
+
+.gnbWrapper {
+  position: absolute;
+  top: 0;
+  left: 40px;
+  width: 280px;
+  height: 2598px;
+  padding-right: 40px;
+  box-shadow: 4px 0px 10px rgba(0, 0, 0, 4%);
+
+  h3 {
+    padding-left: 20px;
+    @include typography.body12;
+    font-weight: 700;
+    line-height: 40px;
+    color: colors.$GREY_300;
+  }
+
+  .logoWrapper {
+    @include flexbox.flexbox($jc: start, $ai: center);
+    width: 100%;
+    height: 150px;
+    border-bottom: 1px solid colors.$SECONDARY_01;
+  }
+
+  .lnbService {
+    position: absolute;
+    top: 190px;
+    left: 0;
+    width: calc(100% - 40px);
+    height: 100px;
+
+    div {
+      display: flex;
+      align-items: center;
+
+      svg {
+        position: absolute;
+        right: 26.59px;
+      }
+
+      input {
+        @include typography.head16;
+        @include typography.textElipsis;
+        width: 240px;
+        height: 60px;
+        padding: 0 50px 0 20px;
+        color: colors.$GREY_800;
+        background: colors.$WHITE;
+        border: 1px solid colors.$GREY_100;
+        border-radius: 10px;
+      }
+    }
+
+    div.isOpen {
+      border-color: colors.$PRIMARY;
+    }
+  }
+
+  .lnbNav {
+    position: absolute;
+    top: 330px;
+    left: 0;
+    width: calc(100% - 40px);
+    height: 160px;
+
+    ul {
+      li {
+        line-height: 60px;
+        border-radius: 10px;
+        background-color: orange;
+
+        a {
+          @include typography.head16;
+          padding: 4px 14px;
+          color: #3A474E;
+          background: colors.$WHITE;
+          width: 100%;
+          height: 100%;
+
+          &.isActive {
+            color: #586CF5;
+
+            background-color: #EDEFF1;
+
+            svg {
+              fill: #586CF5;
+            }
+          }
+
+          svg {
+            fill: #3A474E;
+          }
+        }
+      }
+    }
+  }
+
+  .guide {
+    position: absolute;
+    @include flexbox.flexbox($jc: start, $ai: center);
+    top: 750px;
+    left: 0;
+    width: calc(100% - 40px);
+    height: 100px;
+    background: colors.$SECONDARY_01;
+    border-radius: 10px;
+    padding: 20px 30px;
+
+    svg {
+      background-color: colors.$PRIMARY;
+      border-radius: 50%;
+    }
+
+    .guideWrapper {
+      margin-left: 8px;
+
+      p {
+        @include typography.head16;
+        color: colors.$GREY_800;
+
+        &:last-of-type {
+          @include typography.body12;
+          font-weight: 400;
+          color: colors.$GREY_300;
+        }
+      }
+    }
+  }
+
+  .policy {
+    position: absolute;
+    top: 890px;
+    left: 0;
+    @include typography.body12;
+    color: colors.$GREY_300;
+  }
+
+  .termsOfService {
+    position: absolute;
+    top: 914px;
+    left: 0;
+    @include typography.body12;
+    color: colors.$GREY_300;
+    text-decoration: underline;
+  }
+}

@@ -1,0 +1,61 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/position';
+@use '/src/styles/mixins/flexbox';
+@use '/src/styles/mixins/typography';
+
+.headerWrapper {
+  position: absolute;
+  top: 0;
+  left: 320px;
+  width: calc(100% - 320px);
+  height: 80px;
+  background-color: colors.$BG_G;
+  border-bottom: 1px solid colors.$GREY_50;
+
+  ul {
+    height: 100%;
+    padding: 20px 40px 20px 0;
+
+    li {
+      .bellIcon {
+        position: absolute;
+        top: 28px;
+        right: 226px;
+
+        svg {
+          position: relative;
+          fill: colors.$GREY_800;
+
+          &:last-of-type {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            fill: colors.$SECONDARY_02;
+          }
+        }
+      }
+
+      .gearIcon {
+        position: absolute;
+        top: 28px;
+        right: 172px;
+        svg {
+          fill: yellow;
+        }
+      }
+
+      .profile {
+        position: absolute;
+        top: 20px;
+        right: 40px;
+        @include flexbox.flexbox($jc: end, $ai: center);
+        width: 102px;
+        @include typography.body14;
+        color: colors.$GREY_800;
+        svg {
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/flexbox';
+@use '/src/styles/mixins/visual';
+@use '/src/styles/mixins/responsive';
+
+.main {
+  background-color: antiquewhite;
+}

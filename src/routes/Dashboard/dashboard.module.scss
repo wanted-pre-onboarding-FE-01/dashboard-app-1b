@@ -1,0 +1,35 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/position';
+@use '/src/styles/mixins/flexbox';
+@use '/src/styles/mixins/typography';
+
+.h1 {
+  @include typography.head26;
+  line-height: 80px;
+  color: colors.$GREY_800;
+}
+
+.boardWrapper {
+  .h2 {
+    @include typography.head16;
+    line-height: 60px;
+    color: colors.$GREY_800;
+  }
+
+  .chartWrapper {
+    padding: 40px;
+    background-color: colors.$WHITE;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 4%);
+  }
+}
+
+.boardWrapper + .boardWrapper {
+  margin-top: 37px;
+}
+
+.overflowWrapper {
+  height: 230px;
+  overflow-x: scroll;
+  background-color: yellow;
+}
