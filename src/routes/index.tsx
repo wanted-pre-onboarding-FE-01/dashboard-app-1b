@@ -14,7 +14,7 @@ const App = () => {
       <div className={styles.app}>
         <Routes>
           <Route path='/' element={<Dashboard />} />
-          <Route path='ADmanaging' element={<ADmanaging />} />
+          <Route path='managing' element={<ADmanaging />} />
           <Route path='*' element={<div>404</div>} />
         </Routes>
       </div>

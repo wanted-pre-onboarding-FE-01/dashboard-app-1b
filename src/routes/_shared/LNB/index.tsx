@@ -27,7 +27,7 @@ const LNB = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to='manageAD' className={({ isActive }) => cx({ [styles.isActive]: isActive })}>
+            <NavLink to='managing' className={({ isActive }) => cx({ [styles.isActive]: isActive })}>
               <ManageADImage />
               광고관리
             </NavLink>

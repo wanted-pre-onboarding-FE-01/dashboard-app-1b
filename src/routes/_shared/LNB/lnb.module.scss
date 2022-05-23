@@ -21,7 +21,7 @@
   width: 280px;
   height: 2598px;
   padding-right: 40px;
-  box-shadow: 4px 0px 10px rgba(0, 0, 0, 4%);
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 4%);
 
   h3 {
     padding-left: 20px;
@@ -83,28 +83,26 @@
       li {
         line-height: 60px;
         border-radius: 10px;
-        background-color: orange;
 
         a {
           @include typography.head16;
-          padding: 4px 14px;
-          color: #3A474E;
-          background: colors.$WHITE;
           width: 100%;
           height: 100%;
+          padding: 4px 14px;
+          color: #3a474e;
+          background: colors.$WHITE;
 
           &.isActive {
-            color: #586CF5;
-
-            background-color: #EDEFF1;
+            color: #586cf5;
+            background-color: #edeff1;
 
             svg {
-              fill: #586CF5;
+              fill: #586cf5;
             }
           }
 
           svg {
-            fill: #3A474E;
+            fill: #3a474e;
           }
         }
       }
@@ -113,14 +111,14 @@
 
   .guide {
     position: absolute;
-    @include flexbox.flexbox($jc: start, $ai: center);
     top: 750px;
     left: 0;
     width: calc(100% - 40px);
     height: 100px;
+    padding: 20px 30px;
     background: colors.$SECONDARY_01;
     border-radius: 10px;
-    padding: 20px 30px;
+    @include flexbox.flexbox($jc: start, $ai: center);
 
     svg {
       background-color: colors.$PRIMARY;
