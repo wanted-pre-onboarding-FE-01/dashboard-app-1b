@@ -1,0 +1,53 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/typography';
+
+.tableWrapper {
+  padding-bottom: 20px;
+  overflow-x: scroll;
+
+  &::-webkit-scrollbar {
+    display: block;
+    width: 0;
+    height: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: colors.$GREY_100;
+    border-radius: 10px;
+  }
+
+  table {
+    width: 100%;
+    min-width: 960px;
+    text-align: right;
+    white-space: nowrap;
+    border-collapse: collapse;
+
+    tr {
+      &:last-of-type td {
+        color: colors.$PRIMARY;
+      }
+
+      th,
+      td {
+        @include typography.body12;
+        width: 12.5%;
+        line-height: 40px;
+        border-bottom: 1px solid colors.$GREY_50;
+      }
+
+      th {
+        color: colors.$GREY_300;
+        border-top: 1px solid colors.$GREY_50;
+      }
+
+      td {
+        color: colors.$GREY_800;
+
+        &:first-of-type {
+          text-align: left;
+        }
+      }
+    }
+  }
+}
