@@ -9,11 +9,10 @@ const Header = () => {
           <button type='button' className={styles.bellIcon}>
             <BellIcon />
             <BellpointIcon />
-            <sup />
           </button>
         </li>
         <li>
-          <button type='button' className={styles.gearIcon}>
+          <button type='button'>
             <GearIcon />
           </button>
         </li>
