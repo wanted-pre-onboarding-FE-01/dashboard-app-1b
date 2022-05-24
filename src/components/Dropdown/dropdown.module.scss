@@ -7,11 +7,15 @@
   position: relative;
   width: 123px;
 
+  button {
+    height: 40px;
+  }
+
   .display {
     @include flexbox.flexbox($jc: between, $gap: 20px);
     @include typography.body14;
     width: 100%;
-    padding: 12px 20px;
+    padding: 0 20px;
     border: 1px solid colors.$GREY_100;
     border-radius: 10px;
   }
@@ -28,13 +32,34 @@
     transform: scaleY(0);
     transform-origin: top;
 
-    button {
+    .listItem {
       width: 100%;
       padding: 12px 20px;
       text-align: left;
 
       &:hover {
         background-color: colors.$GREY_50;
+      }
+    }
+
+    .createService {
+      @include flexbox.flexbox;
+      height: 40px;
+
+      input {
+        @include typography.body12;
+        flex: 1;
+        height: 100%;
+        padding: 0 10px;
+        border-top: 1px solid colors.$GREY_100;
+      }
+
+      button {
+        @include typography.body12;
+        height: 100%;
+        padding: 0 10px;
+        color: colors.$WHITE;
+        background-color: colors.$PRIMARY;
       }
     }
   }
@@ -46,5 +71,13 @@
   .isActive {
     opacity: 1;
     transform: scaleY(1);
+  }
+}
+
+.big {
+  width: 100%;
+
+  button {
+    height: 60px;
   }
 }
