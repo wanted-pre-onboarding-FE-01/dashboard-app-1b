@@ -19,6 +19,16 @@ const statusConverter = (status: string) => {
   return `${result}`
 }
 
+export const statusKrToEn = (status: string) => {
+  const result = {
+    '전체 광고': 'all',
+    진행중: 'active',
+    중단됨: 'ended',
+  }[status]
+
+  return result
+}
+
 const dateConverter = (start: string, end: string | null) => {
   const startDate = dayjs(start).format('YYYY-MM-DD')
 
