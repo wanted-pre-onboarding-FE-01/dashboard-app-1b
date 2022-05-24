@@ -3,6 +3,7 @@
 
 .appWrapper {
   display: flex;
+  min-width: 1280px;
 
   .container {
     @include flexbox.columnFlexbox;
