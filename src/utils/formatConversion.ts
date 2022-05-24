@@ -2,19 +2,21 @@ import { IAdType } from 'types/adType'
 import dayjs from 'dayjs'
 
 const titleConverter = (adType: string, title: string) => {
-  if (adType === 'web') {
-    return `웹광고_${title}`
-  }
+  const result = {
+    web: '웹광고',
+    app: '앱광고',
+  }[adType]
 
-  return `앱광고_${title}`
+  return `${result}_${title}`
 }
 
 const statusConverter = (status: string) => {
-  if (status === 'active') {
-    return '진행중'
-  }
+  const result = {
+    active: '진행중',
+    ended: '종료됨',
+  }[status]
 
-  return '종료됨'
+  return `${result}`
 }
 
 const dateConverter = (start: string, end: string | null) => {
