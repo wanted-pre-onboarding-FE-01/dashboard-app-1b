@@ -33,9 +33,7 @@ export const category = atom<ICategory>({
   },
 })
 
-type TAdStatus = 'all' | 'active' | 'ended'
-
-export const adStatus = atom<TAdStatus>({
+export const adStatus = atom<string>({
   key: '#adStatus',
   default: 'all',
 })
