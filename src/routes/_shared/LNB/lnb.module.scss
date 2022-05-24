@@ -31,13 +31,6 @@
         color: colors.$GREY_300;
       }
 
-      input {
-        height: 60px;
-        padding: 0 20px;
-        border: 1px solid colors.$GREY_100;
-        border-radius: 10px;
-      }
-
       a {
         @include flexbox.flexbox(start, center);
         gap: 12px;

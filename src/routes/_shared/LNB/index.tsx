@@ -1,9 +1,18 @@
-import cx from 'classnames'
-import { Link, NavLink } from 'react-router-dom'
 import styles from './lnb.module.scss'
+import cx from 'classnames'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import { Link, NavLink } from 'react-router-dom'
+
+import { service } from 'state/dashBoard'
+import { serviceDropdown } from 'state/dropdown'
+
+import Dropdown from 'components/Dropdown'
 import { LogoImage, ManageADImage, DashboardImage, BulbIcon } from 'assets/svg'
 
 const LNB = () => {
+  const [selectedService, setSelectedService] = useRecoilState(service)
+  const serviceList = useRecoilValue(serviceDropdown)
+
   return (
     <aside className={styles.gnbWrapper}>
       <div className={styles.top}>
@@ -13,7 +22,7 @@ const LNB = () => {
 
         <div className={styles.box}>
           <h3>서비스</h3>
-          <input defaultValue='테스트' />
+          <Dropdown list={serviceList} action={setSelectedService} selected={selectedService} big />
         </div>
 
         <div className={styles.box}>
