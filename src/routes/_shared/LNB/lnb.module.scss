@@ -1,149 +1,105 @@
 @use '/src/styles/constants/colors';
-@use '/src/styles/mixins/position';
 @use '/src/styles/mixins/flexbox';
 @use '/src/styles/mixins/typography';
 
 .gnbWrapper {
-  position: absolute;
-  top: 0;
-  left: 40px;
-  width: 280px;
-  height: 2598px;
-  padding-right: 40px;
+  @include flexbox.flexbox(between, around, col);
+  position: fixed;
+  width: 320px;
+  min-width: 320px;
+  max-width: 320px;
+  min-height: 100vh;
+  padding: 0 40px;
+  background-color: colors.$WHITE;
   box-shadow: 4px 0 10px rgba(0, 0, 0, 4%);
 
-  h3 {
-    padding-left: 20px;
-    @include typography.body12;
-    font-weight: 700;
-    line-height: 40px;
-    color: colors.$GREY_300;
-  }
+  .top {
+    @include flexbox.flexbox(center, around, col, 53px);
 
-  .logoWrapper {
-    @include flexbox.flexbox($jc: start, $ai: center);
-    width: 100%;
-    height: 150px;
-    border-bottom: 1px solid colors.$SECONDARY_01;
-  }
+    .logo {
+      @include flexbox.flexbox(start, center);
+      height: 150px;
+      border-bottom: 1px solid colors.$GREY_50;
+    }
 
-  .lnbService {
-    position: absolute;
-    top: 190px;
-    left: 0;
-    width: calc(100% - 40px);
-    height: 100px;
+    .box {
+      @include flexbox.columnFlexbox(13px);
 
-    div {
-      display: flex;
-      align-items: center;
-
-      svg {
-        position: absolute;
-        right: 26.59px;
+      h3 {
+        @include typography.body12;
+        margin-left: 20px;
+        color: colors.$GREY_300;
       }
 
       input {
-        @include typography.head16;
-        @include typography.textElipsis;
-        width: 240px;
         height: 60px;
-        padding: 0 50px 0 20px;
-        color: colors.$GREY_800;
-        background: colors.$WHITE;
+        padding: 0 20px;
         border: 1px solid colors.$GREY_100;
         border-radius: 10px;
       }
-    }
 
-    div.isOpen {
-      border-color: colors.$PRIMARY;
-    }
-  }
-
-  .lnbNav {
-    position: absolute;
-    top: 330px;
-    left: 0;
-    width: calc(100% - 40px);
-    height: 160px;
-
-    ul {
-      li {
-        a {
-          display: inline-block;
-          @include typography.head16;
-          width: 100%;
-          padding: 4px 14px;
-          line-height: 60px;
-          color: colors.$GREY_800;
-          background: colors.$WHITE;
-          border-radius: 10px;
-          transition: all ease 0.1s;
-
-          &.isActive {
-            color: colors.$PRIMARY;
-            background-color: colors.$GREY_50;
-
-            svg {
-              fill: colors.$PRIMARY;
-            }
-          }
-
-          svg {
-            fill: colors.$GREY_800;
-          }
-        }
-      }
-    }
-  }
-
-  .guide {
-    position: absolute;
-    top: 750px;
-    left: 0;
-    width: calc(100% - 40px);
-    height: 100px;
-    padding: 20px 30px;
-    background: colors.$SECONDARY_01;
-    border-radius: 10px;
-    @include flexbox.flexbox($jc: start, $ai: center);
-
-    svg {
-      background-color: colors.$PRIMARY;
-      border-radius: 50%;
-    }
-
-    .guideWrapper {
-      margin-left: 8px;
-
-      p {
-        @include typography.head16;
+      a {
+        @include flexbox.flexbox(start, center);
+        gap: 12px;
+        height: 60px;
+        padding: 20px;
         color: colors.$GREY_800;
+        border-radius: 10px;
+        transition: 200ms;
 
-        &:last-of-type {
-          @include typography.body12;
-          font-weight: 400;
-          color: colors.$GREY_300;
+        svg {
+          fill: colors.$GREY_800;
+        }
+      }
+
+      .isActive {
+        color: colors.$PRIMARY;
+        background-color: colors.$GREY_50;
+
+        svg {
+          fill: colors.$PRIMARY;
         }
       }
     }
   }
 
-  .policy {
-    position: absolute;
-    top: 890px;
-    left: 0;
-    @include typography.body12;
-    color: colors.$GREY_300;
-  }
+  .bottom {
+    @include flexbox.columnFlexbox(40px);
+    margin-bottom: 40px;
 
-  .termsOfService {
-    position: absolute;
-    top: 914px;
-    left: 0;
-    @include typography.body12;
-    color: colors.$GREY_300;
-    text-decoration: underline;
+    .guide {
+      display: flex;
+      gap: 8px;
+      width: 100%;
+      padding: 20px 30px;
+      background-color: colors.$SECONDARY_01;
+      border-radius: 10px;
+
+      .message {
+        @include flexbox.flexbox(center, start, col, 7px);
+
+        p {
+          @include typography.head16;
+          color: colors.$GREY_800;
+
+          &:last-of-type {
+            @include typography.body12;
+            font-weight: 400;
+            color: colors.$GREY_300;
+          }
+        }
+      }
+    }
+
+    .policy {
+      @include typography.body12;
+      @include flexbox.columnFlexbox(10px);
+      color: colors.$GREY_300;
+
+      a {
+        color: colors.$GREY_300;
+        text-decoration: underline;
+      }
+    }
   }
 }
