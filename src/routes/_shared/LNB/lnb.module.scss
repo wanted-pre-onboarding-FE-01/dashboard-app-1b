@@ -71,15 +71,21 @@
     ul {
       li {
         a {
-          display: inline-block;
-          @include typography.head16;
+          display: flex;
+          align-items: center;
           width: 100%;
           padding: 4px 14px;
+          font-weight: 700;
           line-height: 60px;
           color: colors.$GREY_800;
           background: colors.$WHITE;
           border-radius: 10px;
           transition: all ease 0.1s;
+
+          svg {
+            margin-right: 12px;
+            fill: colors.$GREY_800;
+          }
 
           &.isActive {
             color: colors.$PRIMARY;
@@ -88,10 +94,6 @@
             svg {
               fill: colors.$PRIMARY;
             }
-          }
-
-          svg {
-            fill: colors.$GREY_800;
           }
         }
       }
