@@ -1,19 +1,26 @@
 import styles from './admanaging.module.scss'
-import data from '../../data/wanted_FE_ad-list-data-set.json'
-import Card from './Card'
-import Dropdown from 'routes/ADmanaging/Dropdown'
-import { useRecoilValue } from 'recoil'
-import { adStatus } from 'state/dashBoard'
 import { useMemo } from 'react'
+import { useRecoilState, useRecoilValue } from 'recoil'
+
+import { adStatus } from 'state/dashBoard'
+import { adManagingDropdown } from 'state/dropdown'
+
+import { statusKrToEn } from 'utils/formatConversion'
+
+import Dropdown from 'components/Dropdown'
+import Card from './Card'
+import data from '../../data/wanted_FE_ad-list-data-set.json'
 
 const ADmanaging = () => {
-  const adState = useRecoilValue(adStatus)
+  const [adState, setAdState] = useRecoilState(adStatus)
+  const adList = useRecoilValue(adManagingDropdown)
 
   const filterData = useMemo(() => {
-    if (adState === 'all') {
+    const state = statusKrToEn(adState)
+    if (state === 'all') {
       return data.ads
     }
-    return data.ads.filter((item) => item.status === adState)
+    return data.ads.filter((item) => item.status === state)
   }, [adState])
 
   return (
@@ -22,7 +29,7 @@ const ADmanaging = () => {
 
       <div className={styles.cardContainer}>
         <div className={styles.categoryBox}>
-          <Dropdown />
+          <Dropdown list={adList} action={setAdState} selected={adState} />
           <button className={styles.createBtn} type='button'>
             광고 만들기
           </button>
