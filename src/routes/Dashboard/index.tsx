@@ -1,5 +1,4 @@
 import styles from './dashboard.module.scss'
-import MediaChannelTable from './MediaChannelTable'
 
 const Dashboard = () => {
   return (
@@ -11,9 +10,7 @@ const Dashboard = () => {
       </div>
       <div className={styles.boardWrapper}>
         <h2 className={styles.h2}>매체 현황</h2>
-        <div className={styles.chartWrapper}>
-          <MediaChannelTable />
-        </div>
+        <div className={styles.chartWrapper} />
       </div>
     </>
   )
