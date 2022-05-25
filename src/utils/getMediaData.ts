@@ -37,11 +37,16 @@ export const getMediaData = (recoilDate: IProps) => {
     roas: 0,
   }
   const groupByData = groupBy(data, 'channel')
+
   const filterData: TData = {
     facebook: cloneDeep(dataStructure),
     google: cloneDeep(dataStructure),
     kakao: cloneDeep(dataStructure),
     naver: cloneDeep(dataStructure),
+  }
+
+  const totalData: TData = {
+    all: dataStructure,
   }
 
   COMPANIES.forEach((company) => {
@@ -63,10 +68,6 @@ export const getMediaData = (recoilDate: IProps) => {
       }
     })
   })
-
-  const totalData: TData = {
-    all: dataStructure,
-  }
 
   COMPANIES.forEach((item) => {
     const newFilterData = totalData.all
