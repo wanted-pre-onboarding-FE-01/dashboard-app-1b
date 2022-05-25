@@ -3,7 +3,7 @@ import styles from './mediaChannelTable.module.scss'
 import { rawData } from './calcTotalSum'
 
 const MediaChannelTable = () => {
-  const categoryKR = ['페이스북', '구글', '카카오', '네이버', '총계']
+  const companyKR = ['페이스북', '구글', '카카오', '네이버', '총계']
   return (
     <div className={styles.tableWrapper}>
       <table>
@@ -18,7 +18,7 @@ const MediaChannelTable = () => {
           {rawData.category.map((item, i) => {
             return (
               <tr key={`tr-${item}`}>
-                <td className={styles.categoryKR}>{categoryKR[i]}</td>
+                <td className={styles.companyKR}>{companyKR[i]}</td>
                 <td>{Math.floor(rawData.data[item].cost).toLocaleString()}</td>
                 <td>
                   {Math.floor(

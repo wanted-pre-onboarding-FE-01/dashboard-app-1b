@@ -1,11 +1,11 @@
 import BigNumber from 'bignumber.js'
-import { filterData, dataStructure, TData, CATEGORYS } from 'data/groupByData'
+import { filterData, dataStructure, TData, company } from 'data/media-manufacturing'
 
 const totalData: TData = {
   totalSum: dataStructure,
 }
 
-CATEGORYS.forEach((item) => {
+company.forEach((item) => {
   const newFilterData = totalData.totalSum
   const oldFilterData = filterData[item]
 
@@ -19,10 +19,10 @@ CATEGORYS.forEach((item) => {
   newFilterData.roas = new BigNumber(newFilterData.roas).plus(oldFilterData.roas).toNumber()
 })
 
-CATEGORYS.push('totalSum')
+company.push('totalSum')
 
 export const rawData = {
   header: ['', '광고비', '매출', '광고수익률(ROAS)', '노출수', '클릭 수', '클릭률(CTR)', '클릭당비용(CPC)'],
-  category: CATEGORYS,
+  category: company,
   data: Object.assign(filterData, totalData),
 }
