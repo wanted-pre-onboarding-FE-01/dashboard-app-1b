@@ -1,0 +1,16 @@
+@use '/src/styles/constants/colors';
+
+.dateInputContainer {
+  label {
+    font-size: 14px;
+    color: colors.$GRAY2;
+
+    svg {
+      margin-left: 5px;
+    }
+  }
+
+  input {
+    display: none;
+  }
+}

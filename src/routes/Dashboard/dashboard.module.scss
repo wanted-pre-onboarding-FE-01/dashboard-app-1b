@@ -3,10 +3,20 @@
 @use '/src/styles/mixins/flexbox';
 @use '/src/styles/mixins/typography';
 
-.h1 {
-  @include typography.head26;
-  line-height: 80px;
-  color: colors.$GREY_800;
+.header {
+  @include flexbox.flexbox(between, center);
+  position: relative;
+
+  .h1 {
+    @include typography.head26;
+    line-height: 80px;
+    color: colors.$GREY_800;
+  }
+
+  .datePickerWrapper {
+    position: absolute;
+    right: 0;
+  }
 }
 
 .boardWrapper {
@@ -26,4 +36,10 @@
 
 .boardWrapper + .boardWrapper {
   margin-top: 37px;
+}
+
+.overflowWrapper {
+  height: 230px;
+  overflow-x: scroll;
+  background-color: yellow;
 }

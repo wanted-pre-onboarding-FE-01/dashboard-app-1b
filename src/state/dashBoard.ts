@@ -1,4 +1,6 @@
-import { atom } from 'recoil'
+import dayjs from 'dayjs'
+import { atom, selector } from 'recoil'
+import { TDashBoardCategory } from 'types/dashBoardCategory'
 
 export const service = atom<string>({
   key: '#service',
@@ -6,30 +8,51 @@ export const service = atom<string>({
 })
 
 interface IDate {
-  startDate: Date
-  endDate: Date
+  startDate: string
+  endDate: string
 }
 
-export const date = atom<IDate>({
+export const dateState = atom<IDate>({
   key: '#date',
   default: {
-    startDate: new Date(),
-    endDate: new Date(),
+    startDate: '2022-02-01',
+    endDate: '2022-02-07',
   },
 })
 
-type TCategory = 'ROAS' | '광고비' | '노출수' | '클릭수' | '전환수' | '매출'
+interface IPrevDate {
+  prevStartDate: string
+  prevEndDate: string
+}
+
+export const datePrevSelector = selector<IPrevDate>({
+  key: '#date/prev',
+  get: ({ get }) => {
+    const { endDate, startDate } = get(dateState)
+    const diff = dayjs(endDate).diff(startDate, 'day') + 1
+    const prevStartDate = dayjs(startDate).subtract(diff, 'day').format('YYYY-MM-DD')
+    const prevEndDate = dayjs(prevStartDate)
+      .add(diff - 1, 'day')
+      .format('YYYY-MM-DD')
+    return {
+      prevStartDate,
+      prevEndDate,
+    }
+  },
+})
 
 interface ICategory {
-  categories: TCategory[]
+  oneSelectCategory: TDashBoardCategory
+  twoSelectCategory: TDashBoardCategory | null
   weekly: boolean
 }
 
-export const category = atom<ICategory>({
+export const categoryState = atom<ICategory>({
   key: '#category',
   default: {
-    categories: ['ROAS'],
-    weekly: true,
+    oneSelectCategory: 'sales',
+    twoSelectCategory: 'click',
+    weekly: false,
   },
 })
 
