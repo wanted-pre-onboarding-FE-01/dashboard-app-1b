@@ -1,8 +1,8 @@
 import { atom } from 'recoil'
 
-export const service = atom<string[]>({
+export const service = atom<string>({
   key: '#service',
-  default: ['매드업'],
+  default: '매드업',
 })
 
 interface IDate {
@@ -33,9 +33,7 @@ export const category = atom<ICategory>({
   },
 })
 
-type TAdStatus = 'all' | 'active' | 'ended'
-
-export const adStatus = atom<TAdStatus>({
+export const adStatus = atom<string>({
   key: '#adStatus',
-  default: 'all',
+  default: '전체 광고',
 })

@@ -1,8 +1,38 @@
 @use '/src/styles/constants/colors';
+@use '/src/styles/mixins/position';
 @use '/src/styles/mixins/flexbox';
-@use '/src/styles/mixins/visual';
-@use '/src/styles/mixins/responsive';
+@use '/src/styles/mixins/typography';
 
-.main {
-  background-color: antiquewhite;
+.managing {
+  .h1 {
+    @include typography.head26;
+    line-height: 80px;
+    color: colors.$GREY_800;
+  }
+
+  .cardContainer {
+    @include flexbox.columnFlexbox(40px);
+    padding: 40px;
+    background-color: colors.$WHITE;
+    border-radius: 20px;
+    box-shadow: colors.$CARD_BOX_SHADOW;
+
+    .categoryBox {
+      @include flexbox.flexbox($jc: between);
+
+      .createBtn {
+        @include typography.body14;
+        padding: 12px 20px;
+        font-weight: 700;
+        color: colors.$WHITE;
+        background-color: colors.$PRIMARY;
+        border-radius: 10px;
+      }
+    }
+
+    .adList {
+      @include flexbox.flexbox(start, start, $gap: 20px);
+      flex-wrap: wrap;
+    }
+  }
 }
