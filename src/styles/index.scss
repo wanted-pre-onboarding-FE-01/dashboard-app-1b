@@ -2,3 +2,14 @@
 @import 'base/reset';
 @import 'base/more';
 @import 'base/fonts';
+
+.rdrDefinedRangesWrapper {
+  display: none;
+}
+
+.rdrCalendarWrapper {
+  z-index: 100;
+  width: 450px;
+  border-radius: 10px;
+  box-shadow: #999999 0 10px 20px;
+}
