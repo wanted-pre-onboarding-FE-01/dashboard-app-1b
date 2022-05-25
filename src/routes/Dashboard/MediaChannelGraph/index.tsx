@@ -6,80 +6,18 @@ import {
   VictoryTheme,
   VictoryLegend,
   VictoryLabel,
-  // VictoryTooltip,
+  VictoryTooltip,
 } from 'victory'
-import BigNumber from 'bignumber.js'
-import { COMPANIES, filterData, groupByData } from 'data/media-manufacturing'
 import { CHART_STYLE } from './chartStyle'
 import { useRecoilValue } from 'recoil'
 import { dateState } from 'state/dashBoard'
+import { getBarChartData } from 'utils/getBarChartData'
+import { numberToDot } from 'utils'
 
 const CATEGORYS = ['광고비', '매출', '노출수', '클릭수', '전환수']
-
 const MediaChannelGraph = () => {
   const date = useRecoilValue(dateState)
-
-  const sum = {
-    costSum: 0,
-    salesSum: 0,
-    impSum: 0,
-    clickSum: 0,
-    convSum: 0,
-  }
-
-  const chartData: { category: string; value: number }[][] = []
-
-  COMPANIES.forEach((company) => {
-    groupByData[company].forEach((v) => {
-      const selectDate = new Date(v.date)
-      const startDate = new Date(date.startDate)
-      const endDate = new Date(date.endDate)
-      const target = filterData[company]
-
-      if (startDate <= selectDate && selectDate <= endDate) {
-        target.click = new BigNumber(target.click).plus(v.click).toNumber()
-        target.convValue = new BigNumber(target.convValue).plus(v.convValue).toNumber()
-        target.cost = new BigNumber(target.cost).plus(v.cost).toNumber()
-        target.cpa = new BigNumber(target.cpa).plus(v.cpa).toNumber()
-        target.cpc = new BigNumber(target.cpc).plus(v.cpc).toNumber()
-        target.ctr = new BigNumber(target.ctr).plus(v.ctr).toNumber()
-        target.imp = new BigNumber(target.imp).plus(v.imp).toNumber()
-        target.roas = new BigNumber(target.roas).plus(v.roas).toNumber()
-      }
-    })
-  })
-
-  COMPANIES.forEach((company) => {
-    const target = filterData[company]
-    const sales = new BigNumber(target.roas).multipliedBy(target.cost).div(100).toNumber()
-    const conv = new BigNumber(target.click).multipliedBy(target.roas).toNumber()
-
-    sum.costSum = new BigNumber(sum.costSum).plus(target.cost).toNumber()
-    sum.salesSum = Math.floor(new BigNumber(sum.salesSum).plus(sales).toNumber())
-    sum.impSum = new BigNumber(sum.impSum).plus(target.imp).toNumber()
-    sum.clickSum = new BigNumber(sum.clickSum).plus(target.click).toNumber()
-    sum.convSum = Math.floor(new BigNumber(sum.convSum).plus(conv).toNumber())
-  })
-
-  COMPANIES.forEach((company) => {
-    const target = filterData[company]
-    const sales = new BigNumber(target.roas).multipliedBy(target.cost).div(100).toNumber()
-    const conv = new BigNumber(target.click).multipliedBy(target.roas).toNumber()
-
-    const costPercentage = Math.floor((target.cost * 100) / sum.costSum)
-    const salesPercentage = Math.floor((sales * 100) / sum.salesSum)
-    const impPercentage = Math.floor((target.imp * 100) / sum.impSum)
-    const clickPercentage = Math.floor((target.click * 100) / sum.clickSum)
-    const convPercentage = Math.floor((conv * 100) / sum.convSum)
-
-    chartData.push([
-      { category: CATEGORYS[0], value: costPercentage },
-      { category: CATEGORYS[1], value: salesPercentage },
-      { category: CATEGORYS[2], value: impPercentage },
-      { category: CATEGORYS[3], value: clickPercentage },
-      { category: CATEGORYS[4], value: convPercentage },
-    ])
-  })
+  const { sum, chartData } = getBarChartData(date)
 
   return (
     <VictoryChart
@@ -113,7 +51,32 @@ const MediaChannelGraph = () => {
       />
       <VictoryStack
         colorScale={[...CHART_STYLE.colorscale]}
-        labels={[sum.costSum, sum.salesSum, sum.impSum, sum.clickSum, sum.convSum]}
+        labels={[
+          numberToDot({ num: sum.costSum }),
+          numberToDot({ num: sum.salesSum }),
+          numberToDot({ num: sum.impSum }),
+          numberToDot({ num: sum.clickSum }),
+          numberToDot({ num: sum.convSum }),
+        ]}
+        labelComponent={
+          <VictoryTooltip
+            style={{ fontSize: 14, fill: '#ffffff' }}
+            renderInPortal
+            flyoutStyle={{
+              stroke: 'none',
+              fill: '#3A474E',
+            }}
+            cornerRadius={5}
+            flyoutPadding={{
+              left: 25,
+              right: 25,
+              top: 10,
+              bottom: 10,
+            }}
+            pointerLength={5}
+            dy={-15}
+          />
+        }
       >
         <VictoryBar data={chartData[3]} {...CHART_STYLE.bar} />
         <VictoryBar data={chartData[2]} {...CHART_STYLE.bar} />
