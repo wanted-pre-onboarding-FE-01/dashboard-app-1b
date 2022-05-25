@@ -1,0 +1,11 @@
+@use '/src/styles/mixins/responsive';
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+
+  @include responsive.after('ML') {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
