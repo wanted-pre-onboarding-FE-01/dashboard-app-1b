@@ -19,7 +19,7 @@ COMPANIES.forEach((item) => {
   newFilterData.roas = new BigNumber(newFilterData.roas).plus(oldFilterData.roas).toNumber()
 })
 
-/* COMPANIES.push('totalSum') */
+/* company.push('totalSum') */
 
 export const rawData = {
   header: ['', '광고비', '매출', '광고수익률(ROAS)', '노출수', '클릭 수', '클릭률(CTR)', '클릭당비용(CPC)'],
