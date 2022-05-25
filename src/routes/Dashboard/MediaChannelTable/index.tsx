@@ -1,35 +1,45 @@
 import BigNumber from 'bignumber.js'
+import { useRecoilValue } from 'recoil'
+import { dateState } from 'state/dashBoard'
+import { getMediaData, numberToDot } from 'utils'
+import { companyKRDict, ICompanyKRDict } from './companyKRDict'
 import styles from './mediaChannelTable.module.scss'
-import { rawData } from './calcTotalSum'
+
+const header = ['', '광고비', '매출', 'ROAS', '노출수', '클릭 수 ', '클릭률 (CTR)', '클릭당비용 (CPC)']
+const COMPANIES = ['google', 'facebook', 'kakao', 'naver', 'all']
 
 const MediaChannelTable = () => {
-  const companyKR = ['페이스북', '구글', '카카오', '네이버', '총계']
+  const { startDate, endDate } = useRecoilValue(dateState)
+  const data = getMediaData({ startDate, endDate })
   return (
     <div className={styles.tableWrapper}>
       <table>
         <thead>
           <tr>
-            {rawData.header.map((item) => {
-              return <th key={`tr-${item}`}>{item}</th>
+            {header.map((headerName, index) => {
+              const key = `${headerName}-${index}`
+              return <th key={key}>{headerName}</th>
             })}
           </tr>
         </thead>
         <tbody>
-          {rawData.category.map((item, i) => {
+          {COMPANIES.map((company, index) => {
+            const key = `${company}-${index}`
+            const sales = new BigNumber(data[company].cost).multipliedBy(data[company].roas).dividedBy(100).toNumber()
             return (
-              <tr key={`tr-${item}`}>
-                <td className={styles.companyKR}>{companyKR[i]}</td>
-                <td>{Math.floor(rawData.data[item].cost).toLocaleString()}</td>
+              <tr key={key}>
+                <td>{companyKRDict[company as keyof ICompanyKRDict]}</td>
+                <td>{numberToDot({ num: data[company].cost })}</td>
                 <td>
-                  {Math.floor(
-                    new BigNumber(rawData.data[item].cost).multipliedBy(rawData.data[item].roas).toNumber()
-                  ).toLocaleString()}
+                  {numberToDot({
+                    num: sales,
+                  })}
                 </td>
-                <td>{Math.floor(rawData.data[item].roas).toLocaleString()}</td>
-                <td>{Math.floor(rawData.data[item].imp).toLocaleString()}</td>
-                <td>{Math.floor(rawData.data[item].click).toLocaleString()}</td>
-                <td>{Math.floor(rawData.data[item].ctr).toLocaleString()}</td>
-                <td>{Math.floor(rawData.data[item].cpc).toLocaleString()}</td>
+                <td>{numberToDot({ num: data[company].roas })}</td>
+                <td>{numberToDot({ num: data[company].imp })}</td>
+                <td>{numberToDot({ num: data[company].click })}</td>
+                <td>{numberToDot({ num: data[company].ctr })}</td>
+                <td>{numberToDot({ num: data[company].cpc })}</td>
               </tr>
             )
           })}

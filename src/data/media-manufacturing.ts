@@ -43,6 +43,7 @@ export const groupByData = groupBy(data, 'channel')
 // TODO :: 추후에 DateTime Picker 구현하면 변경
 const startDate = new Date('2022-02-01')
 const endDate = new Date('2022-02-02')
+
 COMPANIES.forEach((category) => {
   groupByData[category].forEach((v) => {
     const date = new Date(v.date)

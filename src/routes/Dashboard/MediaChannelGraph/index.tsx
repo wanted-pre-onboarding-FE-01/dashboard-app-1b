@@ -6,7 +6,7 @@ import {
   VictoryTheme,
   VictoryLegend,
   VictoryLabel,
-  VictoryTooltip,
+  // VictoryTooltip,
 } from 'victory'
 import BigNumber from 'bignumber.js'
 import { COMPANIES, filterData, groupByData } from 'data/media-manufacturing'
