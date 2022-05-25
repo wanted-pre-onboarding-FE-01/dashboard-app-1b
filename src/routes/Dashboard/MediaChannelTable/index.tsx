@@ -30,11 +30,7 @@ const MediaChannelTable = () => {
               <tr key={key}>
                 <td>{companyKRDict[company as keyof ICompanyKRDict]}</td>
                 <td>{numberToDot({ num: data[company].cost })}</td>
-                <td>
-                  {numberToDot({
-                    num: sales,
-                  })}
-                </td>
+                <td>{numberToDot({ num: sales })}</td>
                 <td>{numberToDot({ num: data[company].roas })}</td>
                 <td>{numberToDot({ num: data[company].imp })}</td>
                 <td>{numberToDot({ num: data[company].click })}</td>
