@@ -1,5 +1,4 @@
 import BigNumber from 'bignumber.js'
-import dayjs from 'dayjs'
 import { cloneDeep, groupBy } from 'lodash'
 import data from 'data/wanted_FE-media-channel-data-set.json'
 
@@ -25,7 +24,7 @@ type TData = Record<
 
 const COMPANIES = ['facebook', 'google', 'kakao', 'naver']
 
-export const getMediaData = ({ startDate, endDate }: IProps) => {
+export const getMediaData = (recoilDate: IProps) => {
   const dataStructure = {
     click: 0,
     convValue: 0,
@@ -44,11 +43,15 @@ export const getMediaData = ({ startDate, endDate }: IProps) => {
     kakao: cloneDeep(dataStructure),
     naver: cloneDeep(dataStructure),
   }
-  COMPANIES.forEach((category) => {
-    groupByData[category].forEach((v) => {
-      const date = new Date(v.date)
-      const target = filterData[category]
-      if (dayjs(date).isBetween(startDate, endDate)) {
+
+  COMPANIES.forEach((company) => {
+    groupByData[company].forEach((v) => {
+      const selectDate = new Date(v.date)
+      const startDate = new Date(recoilDate.startDate)
+      const endDate = new Date(recoilDate.endDate)
+      const target = filterData[company]
+
+      if (startDate <= selectDate && selectDate <= endDate) {
         target.click = new BigNumber(target.click).plus(v.click).toNumber()
         target.convValue = new BigNumber(target.convValue).plus(v.convValue).toNumber()
         target.cost = new BigNumber(target.cost).plus(v.cost).toNumber()

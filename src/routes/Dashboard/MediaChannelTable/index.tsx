@@ -9,8 +9,8 @@ const header = ['', '광고비', '매출', 'ROAS', '노출수', '클릭 수 ', '
 const COMPANIES = ['google', 'facebook', 'kakao', 'naver', 'all']
 
 const MediaChannelTable = () => {
-  const { startDate, endDate } = useRecoilValue(dateState)
-  const data = getMediaData({ startDate, endDate })
+  const date = useRecoilValue(dateState)
+  const data = getMediaData(date)
   return (
     <div className={styles.tableWrapper}>
       <table>
