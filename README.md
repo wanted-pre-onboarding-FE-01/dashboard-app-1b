@@ -410,25 +410,25 @@ const groupByData = groupBy(data, 'channel')
 
 2. Date Picker로 선택한 날짜에 포함된 데이터를 더하여 데이터 형태를 가공했습니다.
 ```ts
- COMPANIES.forEach((company) => {
-    groupByData[company].forEach((v) => {
-      const selectDate = new Date(v.date)
-      const startDate = new Date(recoilDate.startDate)
-      const endDate = new Date(recoilDate.endDate)
-      const target = filterData[company]
+COMPANIES.forEach((company) => {
+groupByData[company].forEach((v) => {
+const selectDate = new Date(v.date)
+const startDate = new Date(recoilDate.startDate)
+const endDate = new Date(recoilDate.endDate)
+const target = filterData[company]
 
-      if (startDate <= selectDate && selectDate <= endDate) {
-        target.click = new BigNumber(target.click).plus(v.click).toNumber()
-        target.convValue = new BigNumber(target.convValue).plus(v.convValue).toNumber()
-        target.cost = new BigNumber(target.cost).plus(v.cost).toNumber()
-        target.cpa = new BigNumber(target.cpa).plus(v.cpa).toNumber()
-        target.cpc = new BigNumber(target.cpc).plus(v.cpc).toNumber()
-        target.ctr = new BigNumber(target.ctr).plus(v.ctr).toNumber()
-        target.imp = new BigNumber(target.imp).plus(v.imp).toNumber()
-        target.roas = new BigNumber(target.roas).plus(v.roas).toNumber()
-      }
-    })
-  })
+if (startDate <= selectDate && selectDate <= endDate) {
+target.click = new BigNumber(target.click).plus(v.click).toNumber()
+target.convValue = new BigNumber(target.convValue).plus(v.convValue).toNumber()
+target.cost = new BigNumber(target.cost).plus(v.cost).toNumber()
+target.cpa = new BigNumber(target.cpa).plus(v.cpa).toNumber()
+target.cpc = new BigNumber(target.cpc).plus(v.cpc).toNumber()
+target.ctr = new BigNumber(target.ctr).plus(v.ctr).toNumber()
+target.imp = new BigNumber(target.imp).plus(v.imp).toNumber()
+target.roas = new BigNumber(target.roas).plus(v.roas).toNumber()
+}
+})
+})
 ```
 
 3. 차트에 필요한 데이터를 카테고리 별로 더하여 백분율로 데이터를 가공했습니다.
@@ -536,15 +536,46 @@ COMPANIES.forEach((company) => {
 
 </details>     
 
-### Media Channel Table
+### 매체 현황 Table
 <details>
   <summary>구현 방법</summary>
   
-  1. recoil로 관리하고 있는 날짜와 lodash 라이브러리를 바탕으로 데이터를 분류했습니다.<br />
-  2. 분류한 데이터를 순회하며 출력해야하는 데이터 형태로 가공했습니다.
-  3. 가공한 데이터는 table 태그와 map을 사용해 표로 나타냈습니다.
+1. lodash 라이브러리를 통해 channel별로 데이터를 그룹화했습니다.
 
-  ```ts
+
+2. Date Picker로 선택한 날짜를 포함한 데이터를 모아, 카테고리(COMPANIES)를 순회하며 카테고리 내부 총합을 포함하는 데이터 형태로 가공했습니다.
+
+3. 카테고리(COMPANIES)를 순회하며 카테고리별 총합을 포함하는 데이터 형태로 가공했습니다.
+
+```ts
+COMPANIES.forEach((item) => {
+const newFilterData = totalData.all
+const oldFilterData = filterData[item]
+
+newFilterData.click = new BigNumber(newFilterData.click).plus(oldFilterData.click).toNumber()
+
+newFilterData.convValue = new BigNumber(newFilterData.convValue).plus(oldFilterData.convValue).toNumber()
+
+newFilterData.cost = new BigNumber(newFilterData.cost).plus(oldFilterData.cost).toNumber()
+
+newFilterData.cpa = new BigNumber(newFilterData.cpa).plus(oldFilterData.cpa).toNumber()
+
+newFilterData.cpc = new BigNumber(newFilterData.cpc).plus(oldFilterData.cpc).toNumber()
+
+newFilterData.ctr = new BigNumber(newFilterData.ctr).plus(oldFilterData.ctr).toNumber()
+
+newFilterData.imp = new BigNumber(newFilterData.imp).plus(oldFilterData.imp).toNumber()
+
+newFilterData.roas = new BigNumber(newFilterData.roas).plus(oldFilterData.roas).toNumber()
+})
+
+const filterDataClone = cloneDeep(filterData)
+Object.assign(filterDataClone, totalData)
+```
+
+4. 가공된 데이터를 getMediaData(date)를 통해 넘겨받아 table 태그와 map을 사용해 표로 나타냈습니다.
+
+```ts
 <table>
   <thead>
     <tr>
@@ -558,6 +589,7 @@ COMPANIES.forEach((company) => {
     {COMPANIES.map((company, index) => {
       const key = `${company}-${index}`
       const sales = new BigNumber(data[company].cost).multipliedBy(data[company].roas).dividedBy(100).toNumber()
+      
       return (
         <tr key={key}>
           <td>{companyKRDict[company as keyof ICompanyKRDict]}</td>
