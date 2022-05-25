@@ -28,7 +28,7 @@ const Dashboard = () => {
         <h2 className={styles.h2}>매체 현황</h2>
         <div className={styles.chartWrapper}>
           <MediaChannelGraph />
-          {/* <MediaChannelTable /> */}
+          <MediaChannelTable />
         </div>
       </div>
     </>
