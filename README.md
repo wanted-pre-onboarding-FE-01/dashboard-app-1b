@@ -3,7 +3,7 @@
 🍀 JSON데이터를 활용한 차트 만들기
 
 - **Github Repository URL** <br/> https://github.com/wanted-pre-onboarding-FE-01/dashboard-app-1b
-- **배포 URL** <br/>
+- **배포 URL** <br/> https://madup1-b.netlify.app/
 
 <br/>
 
@@ -38,21 +38,19 @@
  ┃ ┃ ┣ 📜index.js<br/>
  ┃ ┃ ┣ 📜logo.svg<br/>
  ┃ ┃ ┣ 📜manageAD.svg<br/>
- ┃ ┃ ┗ 📜profile.svg<br/>
+ ┃ ┃ ┣ 📜profile.svg<br/>
+ ┃ ┃ ┗ 📜spinner.svg<br/>
  ┣ 📂components<br/>
- ┃ ┗ 📂Dropdown<br/>
+ ┃ ┣ 📂Dropdown<br/>
  ┃ ┃ ┣ 📜dropdown.module.scss<br/>
  ┃ ┃ ┗ 📜index.tsx<br/>
+ ┃ ┗ 📂LoadingPage<br/>
+ ┃ ┃ ┣ 📜index.tsx<br/>
+ ┃ ┃ ┗ 📜loadingPage.module.scss<br/>
  ┣ 📂data<br/>
- ┃ ┣ 📜media-manufacturing.ts<br/>
  ┃ ┣ 📜wanted_FE-media-channel-data-set.json<br/>
  ┃ ┣ 📜wanted_FE_ad-list-data-set.json<br/>
  ┃ ┗ 📜wanted_FE_trend-data-set.json<br/>
- ┣ 📂hooks<br/>
- ┃ ┣ 📂state<br/>
- ┃ ┃ ┗ 📜index.ts<br/>
- ┃ ┣ 📜.DS_Store<br/>
- ┃ ┗ 📜index.tsx<br/>
  ┣ 📂routes<br/>
  ┃ ┣ 📂ADmanaging<br/>
  ┃ ┃ ┣ 📂Card<br/>
@@ -80,6 +78,18 @@
  ┃ ┃ ┃ ┃ ┗ 📜index.tsx<br/>
  ┃ ┃ ┃ ┣ 📜dailyMean.module.scss<br/>
  ┃ ┃ ┃ ┗ 📜index.tsx<br/>
+ ┃ ┃ ┣ 📂DataFilterButtons<br/>
+ ┃ ┃ ┃ ┣ 📂DropdownList<br/>
+ ┃ ┃ ┃ ┃ ┣ 📜OneDropDownList.tsx<br/>
+ ┃ ┃ ┃ ┃ ┣ 📜TwoDropDownList.tsx<br/>
+ ┃ ┃ ┃ ┃ ┣ 📜WeeklyDownList.tsx<br/>
+ ┃ ┃ ┃ ┃ ┣ 📜dropdownList.module.scss<br/>
+ ┃ ┃ ┃ ┃ ┗ 📜index.tsx<br/>
+ ┃ ┃ ┃ ┣ 📜DropdownButton.tsx<br/>
+ ┃ ┃ ┃ ┣ 📜categoryDict.ts<br/>
+ ┃ ┃ ┃ ┣ 📜dropdownButton.module.scss<br/>
+ ┃ ┃ ┃ ┣ 📜index.module.scss<br/>
+ ┃ ┃ ┃ ┗ 📜index.tsx<br/>
  ┃ ┃ ┣ 📂DatePicker<br/>
  ┃ ┃ ┃ ┣ 📂DateRange<br/>
  ┃ ┃ ┃ ┃ ┣ 📜dateRange.module.scss<br/>
@@ -93,7 +103,7 @@
  ┃ ┃ ┃ ┣ 📜chartStyle.ts<br/>
  ┃ ┃ ┃ ┗ 📜index.tsx<br/>
  ┃ ┃ ┣ 📂MediaChannelTable<br/>
- ┃ ┃ ┃ ┣ 📜calcTotalSum.tsx<br/>
+ ┃ ┃ ┃ ┣ 📜companyKRDict.ts<br/>
  ┃ ┃ ┃ ┣ 📜index.tsx<br/>
  ┃ ┃ ┃ ┗ 📜mediaChannelTable.module.scss<br/>
  ┃ ┃ ┣ 📜.DS_Store<br/>
@@ -118,11 +128,8 @@
  ┃ ┃ ┣ 📜_more.scss<br/>
  ┃ ┃ ┗ 📜_reset.scss<br/>
  ┃ ┣ 📂constants<br/>
- ┃ ┃ ┣ 📜_colors.scss<br/>
- ┃ ┃ ┣ 📜_levels.scss<br/>
- ┃ ┃ ┗ 📜_sizes.scss<br/>
+ ┃ ┃ ┗ 📜_colors.scss<br/>
  ┃ ┣ 📂mixins<br/>
- ┃ ┃ ┣ 📜_animation.scss<br/>
  ┃ ┃ ┣ 📜_flexbox.scss<br/>
  ┃ ┃ ┣ 📜_position.scss<br/>
  ┃ ┃ ┣ 📜_responsive.scss<br/>
@@ -132,6 +139,7 @@
  ┃ ┗ 📜index.scss<br/>
  ┣ 📂types<br/>
  ┃ ┣ 📜adType.d.ts<br/>
+ ┃ ┣ 📜channel.d.ts<br/>
  ┃ ┣ 📜daily.d.ts<br/>
  ┃ ┣ 📜dashBoardCategory.d.ts<br/>
  ┃ ┗ 📜dashBoardCategory.ts<br/>
@@ -140,7 +148,9 @@
  ┃ ┣ 📜dateToKorean.ts<br/>
  ┃ ┣ 📜filterDailyByCategory.ts<br/>
  ┃ ┣ 📜formatConversion.ts<br/>
+ ┃ ┣ 📜getBarChartData.ts<br/>
  ┃ ┣ 📜getDailyMean.ts<br/>
+ ┃ ┣ 📜getMediaData.ts<br/>
  ┃ ┣ 📜index.ts<br/>
  ┃ ┣ 📜numberToDot.ts<br/>
  ┃ ┗ 📜unitPicker.ts<br/>
@@ -381,6 +391,12 @@ export const filterDailyByCategory = ({ daily, category, weekly = false }: IProp
 
 
 </details>
+
+<br/>
+
+### 매체 현황
+
+<img src="https://user-images.githubusercontent.com/73621658/170247527-60aab129-b6a1-4d0a-8dd6-db39be7ac369.gif"/>
 
 ---
 
