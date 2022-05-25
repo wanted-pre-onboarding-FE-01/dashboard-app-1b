@@ -3,6 +3,7 @@ import DailyChart from './DailyChart'
 import DatePicker from './DatePicker'
 
 import styles from './dashboard.module.scss'
+import DataFilterButtons from './DataFilterButtons'
 
 const Dashboard = () => {
   return (
@@ -17,6 +18,7 @@ const Dashboard = () => {
         <h2 className={styles.h2}>통합 광고 현황</h2>
         <div className={styles.chartWrapper}>
           <DailyMean />
+          <DataFilterButtons />
           <DailyChart />
         </div>
       </div>
