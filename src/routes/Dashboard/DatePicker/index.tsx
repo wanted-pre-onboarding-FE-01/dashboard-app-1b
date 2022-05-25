@@ -7,7 +7,7 @@ import { RangeKeyDict } from 'react-date-range'
 import styles from './datePicker.module.scss'
 
 import Label from './Label'
-import { useClickAway } from 'hooks'
+import { useClickAway } from 'utils'
 import DateRange from './DateRange'
 import { cx } from 'styles'
 
