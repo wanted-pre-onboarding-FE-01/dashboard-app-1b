@@ -398,6 +398,46 @@ export const filterDailyByCategory = ({ daily, category, weekly = false }: IProp
 
 <img src="https://user-images.githubusercontent.com/73621658/170247527-60aab129-b6a1-4d0a-8dd6-db39be7ac369.gif"/>
 
+### Media Channel Table
+<details>
+  <summary>구현 방법</summary>
+  
+  1. recoil로 관리하고 있는 날짜와 lodash 라이브러리를 바탕으로 데이터를 분류했습니다.<br />
+  2. 분류한 데이터를 순회하며 출력해야하는 데이터 형태로 가공했습니다.
+  3. 가공한 데이터는 table 태그와 map을 사용해 표로 나타냈습니다.
+
+  ```ts
+<table>
+  <thead>
+    <tr>
+      {header.map((headerName, index) => {
+        const key = `${headerName}-${index}`
+        return <th key={key}>{headerName}</th>
+      })}
+    </tr>
+  </thead>
+  <tbody>
+    {COMPANIES.map((company, index) => {
+      const key = `${company}-${index}`
+      const sales = new BigNumber(data[company].cost).multipliedBy(data[company].roas).dividedBy(100).toNumber()
+      return (
+        <tr key={key}>
+          <td>{companyKRDict[company as keyof ICompanyKRDict]}</td>
+          <td>{numberToDot({ num: data[company].cost })}</td>
+          <td>{numberToDot({ num: sales })}</td>
+          <td>{numberToDot({ num: data[company].roas })}</td>
+          <td>{numberToDot({ num: data[company].imp })}</td>
+          <td>{numberToDot({ num: data[company].click })}</td>
+          <td>{numberToDot({ num: data[company].ctr })}</td>
+          <td>{numberToDot({ num: data[company].cpc })}</td>
+        </tr>
+      )
+    })}
+  </tbody>
+</table>
+```
+
+</details>
 ---
 
 ### 광고관리
