@@ -1,6 +1,8 @@
 import DailyMean from './DailyMean'
 import DailyChart from './DailyChart'
 import DatePicker from './DatePicker'
+import MediaChannelGraph from './MediaChannelGraph'
+import MediaChannelTable from './MediaChannelTable'
 
 import styles from './dashboard.module.scss'
 
@@ -22,7 +24,10 @@ const Dashboard = () => {
       </div>
       <div className={styles.boardWrapper}>
         <h2 className={styles.h2}>매체 현황</h2>
-        <div className={styles.chartWrapper} />
+        <div className={styles.chartWrapper}>
+          <MediaChannelGraph />
+          {/* <MediaChannelTable /> */}
+        </div>
       </div>
     </>
   )
