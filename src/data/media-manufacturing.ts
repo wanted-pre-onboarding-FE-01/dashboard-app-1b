@@ -1,3 +1,4 @@
+import BigNumber from 'bignumber.js'
 import { groupBy, cloneDeep } from 'lodash'
 import data from './wanted_FE-media-channel-data-set.json'
 
@@ -38,3 +39,23 @@ export const filterData: TData = {
 export const COMPANIES = ['facebook', 'google', 'kakao', 'naver']
 
 export const groupByData = groupBy(data, 'channel')
+
+// TODO :: 추후에 DateTime Picker 구현하면 변경
+const startDate = new Date('2022-02-01')
+const endDate = new Date('2022-02-02')
+COMPANIES.forEach((category) => {
+  groupByData[category].forEach((v) => {
+    const date = new Date(v.date)
+    const target = filterData[category]
+    if (startDate <= date && date <= endDate) {
+      target.click = new BigNumber(target.click).plus(v.click).toNumber()
+      target.convValue = new BigNumber(target.convValue).plus(v.convValue).toNumber()
+      target.cost = new BigNumber(target.cost).plus(v.cost).toNumber()
+      target.cpa = new BigNumber(target.cpa).plus(v.cpa).toNumber()
+      target.cpc = new BigNumber(target.cpc).plus(v.cpc).toNumber()
+      target.ctr = new BigNumber(target.ctr).plus(v.ctr).toNumber()
+      target.imp = new BigNumber(target.imp).plus(v.imp).toNumber()
+      target.roas = new BigNumber(target.roas).plus(v.roas).toNumber()
+    }
+  })
+})
