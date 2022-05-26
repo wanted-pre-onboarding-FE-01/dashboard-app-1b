@@ -608,7 +608,6 @@ Object.assign(filterDataClone, totalData)
 ```
 
 </details>
----
 
 ### 광고관리
 
