@@ -8,7 +8,10 @@
 <br/>
 
 # 실행 방법
-> git clone https://github.com/wanted-pre-onboarding-FE-01/dashboard-app-1b.git  ➝ yarn install ➝ yarn start
+>1. git clone https://github.com/wanted-pre-onboarding-FE-01/dashboard-app-1b.git 
+>2. cd dashboard-app-1b
+>3. yarn install
+>4. yarn start
 
 <br/>
 
